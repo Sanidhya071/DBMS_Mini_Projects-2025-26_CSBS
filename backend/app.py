@@ -17,7 +17,8 @@ app = Flask(__name__)
 # Vercel Services: backend is mounted at routePrefix (e.g. /_/backend). Override with API_URL_PREFIX.
 if "API_URL_PREFIX" in os.environ:
     API_URL_PREFIX = os.environ["API_URL_PREFIX"].strip().rstrip("/")
-elif os.environ.get("VERCEL"):
+# Use VERCEL_URL (set on real deployments), not VERCEL — CLI/tools may set VERCEL locally.
+elif os.environ.get("VERCEL_URL"):
     API_URL_PREFIX = "/_/backend"
 else:
     API_URL_PREFIX = ""
